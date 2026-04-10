@@ -14,9 +14,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/projects")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
+@CrossOrigin(origins = "*")
 public class ProjectController {
 
+    private static final String BASE_URL = "https://portfolio-production-9608.up.railway.app";
     private final ProjectRepository repo;
 
     public ProjectController(ProjectRepository repo) {
@@ -28,6 +29,9 @@ public class ProjectController {
     public ResponseEntity<List<Project>> getProjects() {
         try {
             List<Project> projects = repo.findAll();
+            for (Project project : projects) {
+                normalizeProject(project);
+            }
             return ResponseEntity.ok(projects);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -38,7 +42,18 @@ public class ProjectController {
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
         Optional<Project> project = repo.findById(id);
-        return project.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return project.map(p -> ResponseEntity.ok(normalizeProject(p))).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    private Project normalizeProject(Project project) {
+        if (project == null) return null;
+        project.setImageUrl(normalizeUrl(project.getImageUrl()));
+        project.setVideoUrl(normalizeUrl(project.getVideoUrl()));
+        return project;
+    }
+
+    private String normalizeUrl(String url) {
+        return url != null ? url.replaceFirst("^https?://[^/]+", BASE_URL) : null;
     }
 
     // UPLOAD PROJECT (IMAGE + VIDEO)

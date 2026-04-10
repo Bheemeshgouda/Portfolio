@@ -70,8 +70,8 @@ function ViewSkills() {
         }
       } catch (error) {
         console.error("Network error during delete:", error);
-        alert("Network error. Please check:\n- Backend server is running on port 8080\n- Skills DELETE endpoint exists\n- Check console for more details");
-        setError("Network error. Please check if backend is running on port 8080");
+        alert("Network error. Please check:\n- Backend server is reachable at the deployed URL\n- Skills DELETE endpoint exists\n- Check console for more details");
+        setError("Network error. Please check if backend is reachable at the deployed URL");
       }
     }
   };

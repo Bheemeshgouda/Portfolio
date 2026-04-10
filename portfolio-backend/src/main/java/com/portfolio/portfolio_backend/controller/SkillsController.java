@@ -16,9 +16,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/skills")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "*")
 public class SkillsController {
 
+    private static final String BASE_URL = "https://portfolio-production-9608.up.railway.app";
     private final SkillRepository repo;
     private final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/skills/";
 
@@ -31,6 +32,9 @@ public class SkillsController {
     public ResponseEntity<List<Skill>> getSkills() {
         try {
             List<Skill> skills = repo.findAll();
+            for (Skill skill : skills) {
+                normalizeSkill(skill);
+            }
             return ResponseEntity.ok(skills);
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +46,17 @@ public class SkillsController {
     @GetMapping("/{id}")
     public ResponseEntity<Skill> getSkillById(@PathVariable Long id) {
         Optional<Skill> skill = repo.findById(id);
-        return skill.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return skill.map(s -> ResponseEntity.ok(normalizeSkill(s))).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    private Skill normalizeSkill(Skill skill) {
+        if (skill == null) return null;
+        skill.setImageUrl(normalizeUrl(skill.getImageUrl()));
+        return skill;
+    }
+
+    private String normalizeUrl(String url) {
+        return url != null ? url.replaceFirst("^https?://[^/]+", BASE_URL) : null;
     }
 
     // ADD NEW SKILL

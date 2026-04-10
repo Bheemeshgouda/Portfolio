@@ -71,8 +71,8 @@ function AddProject() {
       setError(`Cannot connect to backend server at https://portfolio-production-9608.up.railway.app
   
 Please check:
-1. Is your Spring Boot backend running?
-2. Is it running on port 8080?
+1. Is your backend deployed and reachable?
+2. Verify the backend URL is correct
 3. Check the backend console for errors
 4. Try restarting the backend server`);
       setLoading(false);
@@ -108,7 +108,7 @@ Please check:
       setError(`Network error: ${error.message}
       
 Please verify:
-- Backend server is running on port 8080
+- Backend server is reachable at the deployed URL
 - No firewall is blocking the connection
 - The endpoint '/api/projects/upload' exists
 - Check backend console for stack trace`);
@@ -200,7 +200,7 @@ Please verify:
             Backend URL: <strong>https://portfolio-production-9608.up.railway.app</strong><br/>
             Endpoint: <strong>/api/projects/upload</strong><br/>
             Status: {loading ? 'Connecting...' : 'Ready'}<br/>
-            Tip: Make sure your Spring Boot backend is running on port 8080
+            Tip: Make sure your Spring Boot backend is reachable at the deployed host
           </p>
         </div>
       </div>

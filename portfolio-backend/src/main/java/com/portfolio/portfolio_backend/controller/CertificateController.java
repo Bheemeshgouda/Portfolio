@@ -16,9 +16,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/certificates")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class CertificateController {
 
+    private static final String BASE_URL = "https://portfolio-production-9608.up.railway.app";
     private final CertificateRepository repo;
     private final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/certificates/";
 
@@ -31,6 +32,9 @@ public class CertificateController {
     public ResponseEntity<List<Certificate>> getCertificates() {
         try {
             List<Certificate> certificates = repo.findAll();
+            for (Certificate certificate : certificates) {
+                normalizeCertificate(certificate);
+            }
             System.out.println("📋 Retrieved " + certificates.size() + " certificates");
             return ResponseEntity.ok(certificates);
         } catch (Exception e) {
@@ -39,11 +43,20 @@ public class CertificateController {
         }
     }
 
-    // GET CERTIFICATE BY ID
     @GetMapping("/{id}")
     public ResponseEntity<Certificate> getCertificateById(@PathVariable Long id) {
         Optional<Certificate> certificate = repo.findById(id);
-        return certificate.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return certificate.map(cert -> ResponseEntity.ok(normalizeCertificate(cert))).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    private Certificate normalizeCertificate(Certificate certificate) {
+        if (certificate == null) return null;
+        certificate.setImageUrl(normalizeUrl(certificate.getImageUrl()));
+        return certificate;
+    }
+
+    private String normalizeUrl(String url) {
+        return url != null ? url.replaceFirst("^https?://[^/]+", BASE_URL) : null;
     }
 
     // ADD NEW CERTIFICATE

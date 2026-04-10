@@ -13,9 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/about")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*")
 public class AboutController {
 
+    private static final String BASE_URL = "https://portfolio-production-9608.up.railway.app";
     private final AboutRepository aboutRepository;
     private final Path uploadDir = Paths.get(System.getProperty("user.dir"), "uploads", "about");
 
@@ -25,7 +26,22 @@ public class AboutController {
 
     @GetMapping
     public ResponseEntity<List<About>> getAbout() {
-        return ResponseEntity.ok(aboutRepository.findAll());
+        List<About> aboutList = aboutRepository.findAll();
+        for (About about : aboutList) {
+            normalizeAbout(about);
+        }
+        return ResponseEntity.ok(aboutList);
+    }
+
+    private About normalizeAbout(About about) {
+        if (about == null) return null;
+        about.setImageUrl(normalizeUrl(about.getImageUrl()));
+        about.setResumeUrl(normalizeUrl(about.getResumeUrl()));
+        return about;
+    }
+
+    private String normalizeUrl(String url) {
+        return url != null ? url.replaceFirst("^https?://[^/]+", BASE_URL) : null;
     }
 
     @PostMapping("/upload")
