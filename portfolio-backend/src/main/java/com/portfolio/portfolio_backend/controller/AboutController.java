@@ -47,7 +47,7 @@ public class AboutController {
             Path imagePath = uploadDir.resolve(imageFileName);
             Files.write(imagePath, image.getBytes());
 
-            String imageUrl = "http://localhost:8080/uploads/about/" + imageFileName;
+            String imageUrl = "https://portfolio-production-9608.up.railway.app/uploads/about/" + imageFileName;
 
             About about = new About();
             about.setName(name);
@@ -59,7 +59,7 @@ public class AboutController {
                 String resumeFileName = System.currentTimeMillis() + "_" + Paths.get(resume.getOriginalFilename()).getFileName().toString();
                 Path resumePath = uploadDir.resolve(resumeFileName);
                 Files.write(resumePath, resume.getBytes());
-                about.setResumeUrl("http://localhost:8080/uploads/about/" + resumeFileName);
+                about.setResumeUrl("https://portfolio-production-9608.up.railway.app/uploads/about/" + resumeFileName);
             }
 
             About saved = aboutRepository.save(about);

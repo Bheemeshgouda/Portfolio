@@ -73,7 +73,7 @@ public class SkillsController {
                 String imageName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
                 Path imagePath = Paths.get(UPLOAD_DIR, imageName);
                 Files.write(imagePath, image.getBytes());
-                imageUrl = "http://localhost:8080/uploads/skills/" + imageName;
+                imageUrl = "https://portfolio-production-9608.up.railway.app/uploads/skills/" + imageName;
                 System.out.println("✅ Image saved: " + imageName);
             } else {
                 System.out.println("⚠️ No image provided");

@@ -74,7 +74,7 @@ public class CertificateController {
                 String imageName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
                 Path imagePath = Paths.get(UPLOAD_DIR, imageName);
                 Files.write(imagePath, image.getBytes());
-                imageUrl = "http://localhost:8080/uploads/certificates/" + imageName;
+                imageUrl = "https://portfolio-production-9608.up.railway.app/uploads/certificates/" + imageName;
                 System.out.println("✅ Image saved: " + imageName);
             } else {
                 System.out.println("⚠️ No image provided");

@@ -63,7 +63,7 @@ public class ProjectController {
                 String imageName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
                 Path imagePath = Paths.get(uploadDir, imageName);
                 Files.write(imagePath, image.getBytes());
-                imageUrl = "http://localhost:8080/uploads/" + imageName;
+                imageUrl = "https://portfolio-production-9608.up.railway.app/uploads/" + imageName;
             }
 
             // SAVE VIDEO
@@ -71,7 +71,7 @@ public class ProjectController {
                 String videoName = System.currentTimeMillis() + "_" + video.getOriginalFilename();
                 Path videoPath = Paths.get(uploadDir, videoName);
                 Files.write(videoPath, video.getBytes());
-                videoUrl = "http://localhost:8080/uploads/" + videoName;
+                videoUrl = "https://portfolio-production-9608.up.railway.app/uploads/" + videoName;
             }
 
             Project project = new Project();
