@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/skills")
@@ -26,11 +27,13 @@ public class SkillsController {
         this.repo = repo;
     }
 
+    // ✅ GET ALL SKILLS
     @GetMapping
     public ResponseEntity<List<Skill>> getSkills() {
         return ResponseEntity.ok(repo.findAll());
     }
 
+    // ✅ ADD SKILL (CLOUDINARY)
     @PostMapping("/upload")
     public ResponseEntity<?> addSkill(
             @RequestParam("name") String name,
@@ -53,6 +56,55 @@ public class SkillsController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().body("Upload failed");
+        }
+    }
+
+    // ✅ DELETE SKILL (FIXED)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteSkill(@PathVariable Long id) {
+        try {
+
+            if (!repo.existsById(id)) {
+                return ResponseEntity.ok("Skill already deleted or not found");
+            }
+
+            repo.deleteById(id);
+
+            return ResponseEntity.ok("Skill deleted successfully");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body("Delete failed");
+        }
+    }
+
+    // ✅ UPDATE SKILL
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateSkill(
+            @PathVariable Long id,
+            @RequestBody Skill updatedSkill
+    ) {
+        try {
+
+            Optional<Skill> existingSkill = repo.findById(id);
+
+            if (existingSkill.isPresent()) {
+                Skill skill = existingSkill.get();
+
+                skill.setName(updatedSkill.getName());
+
+                if (updatedSkill.getImageUrl() != null) {
+                    skill.setImageUrl(updatedSkill.getImageUrl());
+                }
+
+                return ResponseEntity.ok(repo.save(skill));
+            }
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Skill not found");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body("Update failed");
         }
     }
 }
