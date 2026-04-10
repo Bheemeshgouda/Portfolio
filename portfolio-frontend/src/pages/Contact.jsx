@@ -22,7 +22,7 @@ function Contact() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8080/api/messages", {
+      const response = await fetch("https://portfolio-production-9608.up.railway.app/api/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

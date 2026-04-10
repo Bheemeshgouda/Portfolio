@@ -13,7 +13,7 @@ function AdminSignup() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/admin/auth/signup", {
+      const response = await fetch("https://portfolio-production-9608.up.railway.app/api/admin/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),

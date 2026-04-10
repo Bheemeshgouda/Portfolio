@@ -26,7 +26,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchUnreadCount = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/messages/unread-count");
+        const response = await fetch("https://portfolio-production-9608.up.railway.app/api/messages/unread-count");
         if (!response.ok) return;
         const data = await response.json();
         setUnreadCount(data.count || 0);
@@ -54,7 +54,7 @@ function AdminDashboard() {
     if (!adminId) return;
     setProfileLoading(true);
     try {
-      const response = await fetch(`http://localhost:8080/api/admin/auth/profile/${adminId}`);
+      const response = await fetch(`https://portfolio-production-9608.up.railway.app/api/admin/auth/profile/${adminId}`);
       if (!response.ok) return;
       const data = await response.json();
       const normalized = {
@@ -78,7 +78,7 @@ function AdminDashboard() {
 
   const saveProfile = async (nextProfile) => {
     if (!adminId) return;
-    const response = await fetch(`http://localhost:8080/api/admin/auth/profile/${adminId}`, {
+    const response = await fetch(`https://portfolio-production-9608.up.railway.app/api/admin/auth/profile/${adminId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(nextProfile),

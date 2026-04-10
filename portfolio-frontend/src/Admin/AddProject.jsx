@@ -57,7 +57,7 @@ function AddProject() {
 
     // Check if backend is reachable first
     try {
-      const testResponse = await fetch("http://localhost:8080/api/projects", {
+      const testResponse = await fetch("https://portfolio-production-9608.up.railway.app/api/projects", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +68,7 @@ function AddProject() {
         throw new Error("Backend server is not responding");
       }
     } catch (testError) {
-      setError(`Cannot connect to backend server at http://localhost:8080
+      setError(`Cannot connect to backend server at https://portfolio-production-9608.up.railway.app
   
 Please check:
 1. Is your Spring Boot backend running?
@@ -87,7 +87,7 @@ Please check:
     if (video) formData.append("video", video);
 
     try {
-      const response = await fetch("http://localhost:8080/api/projects/upload", {
+      const response = await fetch("https://portfolio-production-9608.up.railway.app/api/projects/upload", {
         method: "POST",
         body: formData,
       });
@@ -197,7 +197,7 @@ Please verify:
         <div style={{ marginTop: '2rem', padding: '1rem', background: 'rgba(0,0,0,0.3)', borderRadius: '12px' }}>
           <h4 style={{ color: '#f5f5f5', marginBottom: '0.5rem' }}>Connection Details</h4>
           <p style={{ fontSize: '0.8rem', color: '#cfcfcf' }}>
-            Backend URL: <strong>http://localhost:8080</strong><br/>
+            Backend URL: <strong>https://portfolio-production-9608.up.railway.app</strong><br/>
             Endpoint: <strong>/api/projects/upload</strong><br/>
             Status: {loading ? 'Connecting...' : 'Ready'}<br/>
             Tip: Make sure your Spring Boot backend is running on port 8080

@@ -9,7 +9,7 @@ function ViewMessages({ onUnreadChange }) {
   const fetchMessages = async () => {
     try {
       setError("");
-      const response = await fetch("http://localhost:8080/api/messages");
+      const response = await fetch("https://portfolio-production-9608.up.railway.app/api/messages");
       if (!response.ok) throw new Error("Failed to load messages");
       const data = await response.json();
       setMessages(data);
@@ -28,7 +28,7 @@ function ViewMessages({ onUnreadChange }) {
 
   const markAsRead = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/messages/${id}/read`, {
+      const response = await fetch(`https://portfolio-production-9608.up.railway.app/api/messages/${id}/read`, {
         method: "PUT",
       });
       if (!response.ok) throw new Error("Failed to mark message as read");
@@ -40,7 +40,7 @@ function ViewMessages({ onUnreadChange }) {
 
   const markAllAsRead = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/messages/read-all", {
+      const response = await fetch("https://portfolio-production-9608.up.railway.app/api/messages/read-all", {
         method: "PUT",
       });
       if (!response.ok) throw new Error("Failed to mark all as read");

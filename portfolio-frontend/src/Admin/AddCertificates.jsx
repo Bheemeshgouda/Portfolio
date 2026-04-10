@@ -25,7 +25,7 @@ function AddCertificates() {
     formData.append("image", image);
 
     try {
-      const response = await fetch("http://localhost:8080/api/certificates/upload", {
+      const response = await fetch("https://portfolio-production-9608.up.railway.app/api/certificates/upload", {
         method: "POST",
         body: formData
       });

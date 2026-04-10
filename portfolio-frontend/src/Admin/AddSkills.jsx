@@ -25,7 +25,7 @@ function AddSkills() {
     formData.append("image", image);
 
     try {
-      const response = await fetch("http://localhost:8080/api/skills/upload", {
+      const response = await fetch("https://portfolio-production-9608.up.railway.app/api/skills/upload", {
         method: "POST",
         body: formData
       });
@@ -46,7 +46,7 @@ function AddSkills() {
       window.location.reload();
     } catch (err) {
       console.error("Error:", err);
-      alert("Error adding skill:\n" + err.message + "\n\nPlease make sure backend is running on localhost:8080.");
+      alert("Error adding skill:\n" + err.message + "\n\nPlease make sure backend is running properly at https://portfolio-production-9608.up.railway.app");
     } finally {
       setLoading(false);
     }
