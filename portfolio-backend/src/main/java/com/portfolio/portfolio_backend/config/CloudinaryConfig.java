@@ -14,7 +14,7 @@ public class CloudinaryConfig {
                 
                 "cloud_name", "dgblaadal",
                 "api_key", "-xbQD2ETmeZXzxnz2AKt-Qtb2uI",
-                "api_secret", "137973933839161 "
+                "api_secret", "137973933839161"
         ));
     }
 }
