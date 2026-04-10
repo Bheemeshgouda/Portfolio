@@ -27,11 +27,13 @@ public class CertificateController {
         this.repo = repo;
     }
 
+    // ✅ GET ALL CERTIFICATES
     @GetMapping
     public ResponseEntity<List<Certificate>> getCertificates() {
         return ResponseEntity.ok(repo.findAll());
     }
 
+    // ✅ ADD CERTIFICATE (CLOUDINARY)
     @PostMapping("/upload")
     public ResponseEntity<?> uploadCertificate(
             @RequestParam("name") String name,
@@ -54,6 +56,55 @@ public class CertificateController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().body("Upload failed");
+        }
+    }
+
+    // ✅ DELETE CERTIFICATE (FIXED)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCertificate(@PathVariable Long id) {
+        try {
+
+            if (!repo.existsById(id)) {
+                return ResponseEntity.ok("Certificate already deleted or not found");
+            }
+
+            repo.deleteById(id);
+
+            return ResponseEntity.ok("Certificate deleted successfully");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body("Delete failed");
+        }
+    }
+
+    // ✅ UPDATE CERTIFICATE
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCertificate(
+            @PathVariable Long id,
+            @RequestBody Certificate updatedCertificate
+    ) {
+        try {
+
+            Optional<Certificate> existing = repo.findById(id);
+
+            if (existing.isPresent()) {
+                Certificate cert = existing.get();
+
+                cert.setName(updatedCertificate.getName());
+
+                if (updatedCertificate.getImageUrl() != null) {
+                    cert.setImageUrl(updatedCertificate.getImageUrl());
+                }
+
+                return ResponseEntity.ok(repo.save(cert));
+            }
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Certificate not found");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body("Update failed");
         }
     }
 }
