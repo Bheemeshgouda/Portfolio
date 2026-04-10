@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-main: #0a0a0a;
+  --bg-surface: #141414;
+  --bg-surface-soft: rgba(20, 20, 20, 0.85);
+  --text-primary: #f5f5f5;
+  --text-secondary: #b3b3b3;
+  --accent: #ffffff;
+  --border-soft: rgba(255, 255, 255, 0.22);
+  --btn-bg: #1f1f1f;
+  --btn-border: #3a3a3a;
+}
+
+body {
+  margin: 0;
+  padding-top: 0; /* adjust based on navbar height */
+  background: var(--bg-main);
+  color: var(--text-primary);
+}

@@ -1,0 +1,184 @@
+/* ===== HERO SECTION ===== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: white;
+}
+
+/* ===== GLOW EFFECT ===== */
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #00f7ff33, transparent 70%);
+  top: -100px;
+  left: -100px;
+  filter: blur(100px);
+  animation: moveGlow 10s infinite alternate;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #007bff33, transparent 70%);
+  bottom: -100px;
+  right: -100px;
+  filter: blur(120px);
+  animation: moveGlow 12s infinite alternate-reverse;
+}
+
+@keyframes moveGlow {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(100px, 100px);
+  }
+}
+
+/* ===== GRID ===== */
+.hero-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(#ffffff10 1px, transparent 1px),
+                    linear-gradient(90deg, #ffffff10 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}
+
+/* ===== CONTENT ===== */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+}
+
+/* ===== TEXT ===== */
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero h1 span {
+  color: #00f7ff;
+}
+
+.typing {
+  font-size: 1.8rem;
+  color: #00f7ff;
+  height: 40px;
+}
+
+/* ===== PARAGRAPH ===== */
+.hero p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+/* ===== BUTTONS ===== */
+.hero-buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.btn.primary {
+  background: #00f7ff;
+  color: black;
+}
+
+.btn.primary:hover {
+  background: #00c4cc;
+}
+
+.btn.secondary {
+  border: 1px solid #00f7ff;
+  color: #00f7ff;
+}
+
+.btn.secondary:hover {
+  background: #00f7ff;
+  color: black;
+}
+
+/* ===== FADE ANIMATION ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s forwards;
+}
+
+.delay {
+  animation-delay: 0.5s;
+}
+
+.delay2 {
+  animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== PARTICLES ===== */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00f7ff;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-10vh);
+    opacity: 1;
+  }
+}
+
+.floating-icons svg {
+  position: absolute;
+  font-size: 26px;
+  opacity: 0.12;
+  animation: floatIcon 10s infinite ease-in-out;
+}
+
+.floating-icons svg:nth-child(1) { top: 10%; left: 15%; }
+.floating-icons svg:nth-child(2) { top: 20%; left: 70%; }
+.floating-icons svg:nth-child(3) { top: 60%; left: 10%; }
+.floating-icons svg:nth-child(4) { top: 75%; left: 80%; }
+.floating-icons svg:nth-child(5) { top: 40%; left: 50%; }
+.floating-icons svg:nth-child(6) { top: 15%; left: 40%; }
+.floating-icons svg:nth-child(7) { top: 70%; left: 30%; }
+.floating-icons svg:nth-child(8) { top: 50%; left: 85%; }
+.floating-icons svg:nth-child(9) { top: 30%; left: 60%; }
+.floating-icons svg:nth-child(10) { top: 80%; left: 20%; }
+.floating-icons svg:nth-child(11) { top: 25%; left: 25%; }
+.floating-icons svg:nth-child(12) { top: 65%; left: 65%; }

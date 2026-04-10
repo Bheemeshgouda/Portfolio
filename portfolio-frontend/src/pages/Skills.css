@@ -1,0 +1,422 @@
+/* Skills.css */
+
+.skills {
+  min-height: 100vh;
+  padding: 100px 2rem;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* Animated Background */
+.skills::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: 
+    radial-gradient(circle at 20% 40%, rgba(96, 165, 250, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 60%, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
+  animation: bgPulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes bgPulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Floating Particles */
+.skills::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(circle, rgba(96, 165, 250, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: particleDrift 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particleDrift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 40px);
+  }
+}
+
+/* Title */
+.skills h2 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: #f5f5f5;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+@keyframes titleGradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.skills h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: #d4d4d4;
+  border-radius: 3px;
+  animation: lineExpand 2s ease-in-out infinite;
+}
+
+@keyframes lineExpand {
+  0%, 100% {
+    width: 100px;
+  }
+  50% {
+    width: 150px;
+  }
+}
+
+/* Skills Container */
+.skills-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Skill Card */
+.skill-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  animation: cardReveal 0.6s ease-out backwards;
+}
+
+/* Staggered Animation */
+.skill-card:nth-child(1) { animation-delay: 0.1s; }
+.skill-card:nth-child(2) { animation-delay: 0.2s; }
+.skill-card:nth-child(3) { animation-delay: 0.3s; }
+.skill-card:nth-child(4) { animation-delay: 0.4s; }
+.skill-card:nth-child(5) { animation-delay: 0.5s; }
+.skill-card:nth-child(6) { animation-delay: 0.6s; }
+.skill-card:nth-child(7) { animation-delay: 0.7s; }
+.skill-card:nth-child(8) { animation-delay: 0.8s; }
+.skill-card:nth-child(9) { animation-delay: 0.9s; }
+.skill-card:nth-child(10) { animation-delay: 1s; }
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card Hover Effect */
+.skill-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Glowing Border Effect */
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.skill-card:hover::before {
+  left: 100%;
+}
+
+/* Card Image */
+.skill-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.3));
+}
+
+.skill-card:hover img {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.5));
+}
+
+/* Skill Name */
+.skill-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0;
+  transition: all 0.3s ease;
+  color: #f1f1f1;
+}
+
+.skill-card:hover h3 {
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Progress Bar Effect (Optional) */
+.skill-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #ffffff, #d4d4d4, #9f9f9f);
+  transition: width 0.4s ease;
+  border-radius: 0 0 20px 20px;
+}
+
+.skill-card:hover::after {
+  width: 100%;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #f1f1f1;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Empty State */
+.no-skills {
+  text-align: center;
+  padding: 3rem;
+  color: #94a3b8;
+  font-size: 1.2rem;
+  grid-column: 1 / -1;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .skills-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .skills {
+    padding: 80px 1.5rem;
+  }
+
+  .skills h2 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .skill-card {
+    padding: 1.5rem;
+  }
+
+  .skill-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+  }
+
+  .skill-card h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .skills {
+    padding: 60px 1rem;
+  }
+
+  .skills h2 {
+    font-size: 1.8rem;
+  }
+
+  .skills-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    padding: 1rem;
+  }
+
+  .skill-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.8rem;
+  }
+
+  .skill-card h3 {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet Landscape */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .skills-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+/* Optional: Add Floating Animation for Cards */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.skill-card:hover {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Optional: Add Glow Effect on Hover */
+.skill-card:hover {
+  box-shadow: 0 0 30px rgba(96, 165, 250, 0.3);
+}
+
+/* Optional: Add Rotating Border Effect */
+@keyframes rotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.skill-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optional: Add Sparkle Effect on Hover */
+.skill-card:active {
+  transform: scale(0.98);
+}
+
+/* Print Styles */
+@media print {
+  .skills {
+    background: white;
+    padding: 20px;
+  }
+  
+  .skill-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .skill-card::before,
+  .skill-card::after {
+    display: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .skills {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .skill-card,
+  .skill-card::before,
+  .skill-card::after,
+  .skills h2,
+  .skills h2::after {
+    animation: none;
+    transition: none;
+  }
+  
+  .skill-card:hover {
+    transform: none;
+  }
+}
+
+/* Optional: Add Tooltip on Hover */
+.skill-card {
+  position: relative;
+}
+
+.skill-card[data-level]::before {
+  content: attr(data-level);
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, #ffffff, #bdbdbd);
+  color: #111111;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-card:hover[data-level]::before {
+  opacity: 1;
+}
