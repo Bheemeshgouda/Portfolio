@@ -14,12 +14,7 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins(
-                            "https://portfolio-psi-two-40.vercel.app",
-                            "https://bheemesh-gouda.onrender.com",
-                            "http://localhost:5173",
-                            "http://localhost:3000"
-                        )
+                        .allowedOrigins("https://portfolio-psi-two-40.vercel.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
