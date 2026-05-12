@@ -14,9 +14,14 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOrigins("https://portfolio-psi-two-40.vercel.app")
+                        .allowedOrigins(
+                            "http://localhost:3000",
+                            "http://localhost:5173",
+                            "https://portfolio-psi-two-40.vercel.app"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
         };
     }
