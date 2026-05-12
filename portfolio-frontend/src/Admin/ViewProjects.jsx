@@ -14,7 +14,7 @@ function ViewProjects() {
     imageUrl: ""
   });
 
-  const API_BASE_URL = "https://portfolio-production-9608.up.railway.app/api";
+  const API_BASE_URL = "/api";
 
   // Fetch projects
   const fetchProjects = async () => {

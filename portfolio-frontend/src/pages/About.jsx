@@ -6,7 +6,7 @@ function About() {
   const [data, setData] = useState(null);
   const [loadError, setLoadError] = useState(false);
   const aboutRef = useRef(null);
-  const API_BASE_URL = "https://portfolio-production-9608.up.railway.app";
+  const API_BASE_URL = "";
 
   const resolveImageUrl = (imageUrl) => {
     if (!imageUrl) return "";
@@ -16,7 +16,7 @@ function About() {
   };
 
   useEffect(() => {
-    fetch("https://portfolio-production-9608.up.railway.app/api/about")
+    fetch("/api/about")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load About");
         return res.json();

@@ -14,7 +14,7 @@ function ViewCertifications() {
   // Fetch certifications
   const fetchCertifications = async () => {
     try {
-      const response = await fetch("https://portfolio-production-9608.up.railway.app/api/certificates");
+      const response = await fetch("/api/certificates");
       
       if (!response.ok) {
         throw new Error("Failed to fetch certificates");
@@ -37,7 +37,7 @@ function ViewCertifications() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this certificate?")) {
       try {
-        const response = await fetch(`https://portfolio-production-9608.up.railway.app/api/certificates/${id}`, {
+        const response = await fetch(`/api/certificates/${id}`, {
           method: "DELETE",
         });
         
@@ -76,7 +76,7 @@ function ViewCertifications() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://portfolio-production-9608.up.railway.app/api/certificates/${editingCert.id}`, {
+      const response = await fetch(`/api/certificates/${editingCert.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

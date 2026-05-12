@@ -5,7 +5,7 @@ function Projects() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch("https://portfolio-production-9608.up.railway.app/api/projects")
+    fetch("/api/projects")
       .then(res => res.json())
       .then(data => setProjects(data));
   }, []);

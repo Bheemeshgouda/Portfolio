@@ -6,7 +6,7 @@ function Skills() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://portfolio-production-9608.up.railway.app/api/skills")
+    fetch("/api/skills")
       .then(res => res.json())
       .then(data => {
         setSkills(data);

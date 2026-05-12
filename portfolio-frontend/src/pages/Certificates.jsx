@@ -9,7 +9,7 @@ function Certificates() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://portfolio-production-9608.up.railway.app/api/certificates")
+    fetch("/api/certificates")
       .then(res => res.json())
       .then(data => setCerts(data));
   }, []);
