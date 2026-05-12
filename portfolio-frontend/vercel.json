@@ -1,6 +1,7 @@
 {
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://bheemesh-gouda.onrender.com/api/:path*" },
+    { "source": "/uploads/:path*", "destination": "https://bheemesh-gouda.onrender.com/uploads/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
