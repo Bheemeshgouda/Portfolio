@@ -11,3 +11,4 @@ RUN ./mvnw clean install -DskipTests
 EXPOSE 8080
 
 CMD ["java", "-jar", "target/portfolio-backend-0.0.1-SNAPSHOT.jar"]
+
