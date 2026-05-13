@@ -15,17 +15,31 @@ function About() {
         return res.json();
       })
       .then((payload) => {
-        if (Array.isArray(payload) && payload.length === 0) {
-          setData({ name: "", title: "", description: "", imageUrl: "" });
+        if (!payload || (Array.isArray(payload) && payload.length === 0)) {
+          setData({
+            name: "About",
+            title: "",
+            description: "",
+            imageUrl: "",
+          });
           return;
         }
 
-        const aboutData = Array.isArray(payload)
-          ? [...payload]
+        const items = Array.isArray(payload) ? payload : [payload];
+        const aboutData = [...items]
               .sort((a, b) => (b.id || 0) - (a.id || 0))
-              .find((item) => item?.imageUrl) || payload[payload.length - 1]
-          : payload;
-        if (!aboutData) throw new Error("No about data found");
+              .find((item) => item?.imageUrl) || items[items.length - 1];
+
+        if (!aboutData) {
+          setData({
+            name: "About",
+            title: "",
+            description: "",
+            imageUrl: "",
+          });
+          return;
+        }
+
         setData({
           ...aboutData,
           imageUrl: resolveImageUrl(aboutData.imageUrl),
