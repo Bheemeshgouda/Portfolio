@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import "./Projects.css";
+import { apiUrl, resolveImageUrl } from "../config";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch("/api/projects")
+    fetch(apiUrl("/api/projects"))
       .then(res => res.json())
       .then(data => setProjects(data));
   }, []);
@@ -23,9 +24,9 @@ function Projects() {
               <div className="card-front">
                 <div className="project-media">
                   {p.videoUrl ? (
-                    <video src={p.videoUrl} autoPlay loop muted />
+                    <video src={resolveImageUrl(p.videoUrl)} autoPlay loop muted />
                   ) : (
-                    <img src={p.imageUrl} alt={p.title} />
+                    <img src={resolveImageUrl(p.imageUrl)} alt={p.title} />
                   )}
                 </div>
                 <h3>{p.title}</h3>

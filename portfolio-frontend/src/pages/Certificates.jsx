@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Certificates.css";
+import { apiUrl, resolveImageUrl } from "../config";
 
 function Certificates() {
   const [certs, setCerts] = useState([]);
@@ -9,7 +10,7 @@ function Certificates() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/api/certificates")
+    fetch(apiUrl("/api/certificates"))
       .then(res => res.json())
       .then(data => setCerts(data));
   }, []);
@@ -34,7 +35,7 @@ function Certificates() {
             onDoubleClick={() => setSelectedCert(cert)}
             onTouchEnd={() => handleTouchEnd(cert)}
           >
-            <img src={cert.imageUrl} alt={cert.name} />
+            <img src={resolveImageUrl(cert.imageUrl)} alt={cert.name} />
             <h3>{cert.name}</h3>
           </div>
         ))}
@@ -54,7 +55,7 @@ function Certificates() {
             >
               Close
             </button>
-            <img src={selectedCert.imageUrl} alt={selectedCert.name} />
+            <img src={resolveImageUrl(selectedCert.imageUrl)} alt={selectedCert.name} />
             <h3>{selectedCert.name}</h3>
           </div>
         </div>

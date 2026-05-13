@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "../config";
 
 function AddCertificates() {
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ function AddCertificates() {
     formData.append("image", image);
 
     try {
-      const response = await fetch("/api/certificates/upload", {
+      const response = await fetch(apiUrl("/api/certificates/upload"), {
         method: "POST",
         body: formData
       });

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { apiUrl } from "../config";
 import "./AdminAuth.css";
 
 function AdminSignin() {
@@ -12,7 +13,7 @@ function AdminSignin() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("/api/admin/auth/signin", {
+      const response = await fetch(apiUrl("/api/admin/auth/signin"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -47,6 +48,8 @@ function AdminSignin() {
         <form onSubmit={handleSubmit}>
           <input
             type="email"
+            name="email"
+            autoComplete="username"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -54,6 +57,8 @@ function AdminSignin() {
           />
           <input
             type="password"
+            name="password"
+            autoComplete="current-password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

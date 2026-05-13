@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "../config";
 
 function EditAbout() {
   const [form, setForm] = useState({ name: "", title: "", description: "" });
@@ -24,7 +25,7 @@ function EditAbout() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/about/upload", {
+      const response = await fetch(apiUrl("/api/about/upload"), {
         method: "POST",
         body: formData,
       });

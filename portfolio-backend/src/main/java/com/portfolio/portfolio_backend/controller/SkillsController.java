@@ -15,7 +15,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/skills")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://portfolio-psi-two-40.vercel.app"
+})
 public class SkillsController {
 
     private final SkillRepository repo;

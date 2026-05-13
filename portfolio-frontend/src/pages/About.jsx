@@ -1,27 +1,25 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { apiUrl, resolveImageUrl } from "../config";
 import "./About.css";
 
 function About() {
   const [data, setData] = useState(null);
   const [loadError, setLoadError] = useState(false);
   const aboutRef = useRef(null);
-  const API_BASE_URL = "";
-
-  const resolveImageUrl = (imageUrl) => {
-    if (!imageUrl) return "";
-    if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) return imageUrl;
-    if (imageUrl.startsWith("/")) return `${API_BASE_URL}${imageUrl}`;
-    return `${API_BASE_URL}/${imageUrl}`;
-  };
 
   useEffect(() => {
-    fetch("/api/about")
+    fetch(apiUrl("/api/about"))
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load About");
         return res.json();
       })
       .then((payload) => {
+        if (Array.isArray(payload) && payload.length === 0) {
+          setData({ name: "", title: "", description: "", imageUrl: "" });
+          return;
+        }
+
         const aboutData = Array.isArray(payload)
           ? [...payload]
               .sort((a, b) => (b.id || 0) - (a.id || 0))

@@ -13,7 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/about")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://portfolio-psi-two-40.vercel.app"
+})
 public class AboutController {
 
     private final AboutRepository aboutRepository;

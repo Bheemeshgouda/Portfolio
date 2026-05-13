@@ -15,7 +15,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/certificates")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://portfolio-psi-two-40.vercel.app"
+})
 public class CertificateController {
 
     private final CertificateRepository repo;

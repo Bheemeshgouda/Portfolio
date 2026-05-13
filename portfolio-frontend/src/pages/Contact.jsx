@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Contact.css";
+import { apiUrl } from "../config";
 
 function Contact() {
   const [form, setForm] = useState({
@@ -22,7 +23,7 @@ function Contact() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/messages", {
+      const response = await fetch(apiUrl("/api/messages"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,6 +55,7 @@ function Contact() {
           <input
             type="text"
             name="name"
+            autoComplete="name"
             placeholder="Your Name"
             value={form.name}
             onChange={handleChange}
@@ -63,6 +65,7 @@ function Contact() {
           <input
             type="email"
             name="email"
+            autoComplete="email"
             placeholder="Your Email"
             value={form.email}
             onChange={handleChange}
@@ -71,6 +74,7 @@ function Contact() {
 
           <textarea
             name="message"
+            autoComplete="off"
             placeholder="Your Message"
             value={form.message}
             onChange={handleChange}

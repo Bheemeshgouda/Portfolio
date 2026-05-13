@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "../config";
 
 function AddSkills() {
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ function AddSkills() {
     formData.append("image", image);
 
     try {
-      const response = await fetch("/api/skills/upload", {
+      const response = await fetch(apiUrl("/api/skills/upload"), {
         method: "POST",
         body: formData
       });

@@ -9,17 +9,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CloudinaryConfig {
 
-    @Value("${CLOUDINARY_CLOUD_NAME}")
+    @Value("${CLOUDINARY_CLOUD_NAME:#{null}}")
     private String cloudName;
 
-    @Value("${CLOUDINARY_API_KEY}")
+    @Value("${CLOUDINARY_API_KEY:#{null}}")
     private String apiKey;
 
-    @Value("${CLOUDINARY_API_SECRET}")
+    @Value("${CLOUDINARY_API_SECRET:#{null}}")
     private String apiSecret;
 
     @Bean
     public Cloudinary cloudinary() {
+        if (cloudName == null || cloudName.isBlank() || apiKey == null || apiKey.isBlank() || apiSecret == null || apiSecret.isBlank()) {
+            // Return a dummy Cloudinary instance for local development
+            return new Cloudinary(ObjectUtils.asMap(
+                    "cloud_name", "dummy",
+                    "api_key", "dummy",
+                    "api_secret", "dummy"
+            ));
+        }
         return new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", cloudName,
                 "api_key", apiKey,

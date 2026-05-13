@@ -12,7 +12,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/admin/auth")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://portfolio-psi-two-40.vercel.app"
+})
 public class AdminAuthController {
 
     private final AdminUserRepository adminUserRepository;

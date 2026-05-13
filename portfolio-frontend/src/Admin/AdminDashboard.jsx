@@ -8,6 +8,7 @@ import ViewProjects from "./ViewProjects";
 import ViewSkills from "./ViewSkills";
 import ViewCertifications from "./ViewCertifications";
 import ViewMessages from "./ViewMessages";
+import { apiUrl } from "../config";
 import "./AdminDashboard.css";
 
 function AdminDashboard() {
@@ -26,7 +27,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchUnreadCount = async () => {
       try {
-        const response = await fetch("/api/messages/unread-count");
+        const response = await fetch(apiUrl("/api/messages/unread-count"));
         if (!response.ok) return;
         const data = await response.json();
         setUnreadCount(data.count || 0);
@@ -54,8 +55,13 @@ function AdminDashboard() {
     if (!adminId) return;
     setProfileLoading(true);
     try {
-      const response = await fetch(`/api/admin/auth/profile/${adminId}`);
-      if (!response.ok) return;
+      const response = await fetch(apiUrl(`/api/admin/auth/profile/${adminId}`));
+      if (!response.ok) {
+        if (response.status === 404) {
+          localStorage.removeItem("adminUser");
+        }
+        return;
+      }
       const data = await response.json();
       const normalized = {
         name: data.name || "",
@@ -78,7 +84,7 @@ function AdminDashboard() {
 
   const saveProfile = async (nextProfile) => {
     if (!adminId) return;
-    const response = await fetch(`/api/admin/auth/profile/${adminId}`, {
+    const response = await fetch(apiUrl(`/api/admin/auth/profile/${adminId}`), {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(nextProfile),
@@ -229,9 +235,9 @@ function AdminDashboard() {
                 }
               }}
             >
-              <input name="name" defaultValue={profile.name} placeholder="Name" required />
-              <input name="email" type="email" defaultValue={profile.email} placeholder="Email" required />
-              <input name="phone" defaultValue={profile.phone} placeholder="Phone" />
+              <input name="name" autoComplete="name" defaultValue={profile.name} placeholder="Name" required />
+              <input name="email" type="email" autoComplete="email" defaultValue={profile.email} placeholder="Email" required />
+              <input name="phone" autoComplete="tel" defaultValue={profile.phone} placeholder="Phone" />
               <button type="submit">Save Profile</button>
             </form>
           </div>

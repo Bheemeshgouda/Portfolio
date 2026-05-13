@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl, API_BASE_URL } from "../config";
 import "./AddProject.css";
 
 function AddProject() {
@@ -57,7 +58,7 @@ function AddProject() {
 
     // Check if backend is reachable first
     try {
-      const testResponse = await fetch("/api/projects", {
+      const testResponse = await fetch(apiUrl("/api/projects"), {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +88,7 @@ Please check:
     if (video) formData.append("video", video);
 
     try {
-      const response = await fetch("/api/projects/upload", {
+      const response = await fetch(apiUrl("/api/projects/upload"), {
         method: "POST",
         body: formData,
       });
@@ -197,7 +198,7 @@ Please verify:
         <div style={{ marginTop: '2rem', padding: '1rem', background: 'rgba(0,0,0,0.3)', borderRadius: '12px' }}>
           <h4 style={{ color: '#f5f5f5', marginBottom: '0.5rem' }}>Connection Details</h4>
           <p style={{ fontSize: '0.8rem', color: '#cfcfcf' }}>
-            Backend URL: <strong></strong><br/>
+            Backend URL: <strong>{API_BASE_URL}</strong><br/>
             Endpoint: <strong>/api/projects/upload</strong><br/>
             Status: {loading ? 'Connecting...' : 'Ready'}<br/>
             Tip: Make sure your Spring Boot backend is reachable at the deployed host

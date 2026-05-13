@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import "./Skills.css";
+import { apiUrl, resolveImageUrl } from "../config";
 
 function Skills() {
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/skills")
+    fetch(apiUrl("/api/skills"))
       .then(res => res.json())
       .then(data => {
         setSkills(data);
@@ -35,7 +36,7 @@ function Skills() {
         {skills.length > 0 ? (
           skills.map(skill => (
             <div className="skill-card" key={skill.id} data-level="Advanced">
-              <img src={skill.imageUrl} alt={skill.name} />
+              <img src={resolveImageUrl(skill.imageUrl)} alt={skill.name} />
               <h3>{skill.name}</h3>
             </div>
           ))
